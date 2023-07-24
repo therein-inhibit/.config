@@ -5,27 +5,27 @@
 
 
 -- apply f to all elements in table
-local function foreach(tbl, f)
-    local t = {}
-    for key, value in ipairs(tbl) do t[key] = f(value) end
-    return t
-end
-
-local function qf_populate(lines, mode)
-  if mode == nil or type(mode) == "table" then
-    lines = foreach(lines, function(item)
-      return { filename = item, lnum = 1, col = 1, text = item }
-    end)
-    mode = "r"
-  end
-
-  vim.fn.setqflist(lines, mode)
-
-  vim.cmd([[
-        belowright cwindow
-        wincmd p
-    ]])
-end
+-- local function foreach(tbl, f)
+--     local t = {}
+--     for key, value in ipairs(tbl) do t[key] = f(value) end
+--     return t
+-- end
+--
+-- local function qf_populate(lines, mode)
+--   if mode == nil or type(mode) == "table" then
+--     lines = foreach(lines, function(item)
+--       return { filename = item, lnum = 1, col = 1, text = item }
+--     end)
+--     mode = "r"
+--   end
+--
+--   vim.fn.setqflist(lines, mode)
+--
+--   vim.cmd([[
+--         belowright cwindow
+--         wincmd p
+--     ]])
+-- end
 
 -- populate qf list with changes (if multiple files modified)
 -- NOTE(vir): now using nvim-notify
@@ -80,9 +80,9 @@ local function qf_rename()
         timeout = 2500,
       })
 
-      if num_files > 1 then
-        qf_populate(entries, "r")
-      end
+      -- if num_files > 1 then
+      --   qf_populate(entries, "r")
+      -- end
     end)
   end)
 end
